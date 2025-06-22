@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Resume Builder</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container" id="mainContainer">
+        <!-- Chat Interface -->
+        <div class="chat-panel" id="chatPanel">
+            <div class="chat-header">
+                <div class="panel-controls">
+                    <button class="panel-btn" onclick="setViewMode('split')" title="Split View">⚌ Split</button>
+                    <button class="panel-btn" onclick="setViewMode('chat')" title="Chat Only">💬 Chat</button>
+                    <button class="panel-btn" onclick="setViewMode('pdf')" title="PDF Only">📄 PDF</button>
+                </div>
+                <h1>🤖 AI Resume Builder</h1>
+                <p>Tell me about your experience, skills, and achievements</p>
+            </div>
+            
+            <div class="chat-messages" id="chatMessages">
+                <div class="message system">
+                    👋 Welcome! I'm here to help you create a professional resume. Let's start by telling me about yourself.
+                </div>
+                <div class="message ai">
+                    Hello! I'm your AI resume assistant. I can help you create a professional resume based on your:
+                    <br><br>
+                    • Education background
+                    <br>• Work experience
+                    <br>• Skills and certifications
+                    <br>• Projects and achievements
+                    <br><br>
+                    What would you like to start with? Try the quick action buttons below or just tell me about yourself!
+                </div>
+                <div class="message system">
+                    📄 Your existing resume should be loading in the preview. Use the view controls in the chat header to customize your layout!
+                </div>
+            </div>
+            
+            <div class="quick-actions">
+                <h4>🚀 Quick Actions:</h4>
+                <div class="action-buttons">
+                    <button class="action-button" onclick="addTemplate('education')">🎓 Add Education</button>
+                    <button class="action-button" onclick="addTemplate('experience')">💼 Add Experience</button>
+                    <button class="action-button" onclick="addTemplate('skills')">⚡ Add Skills</button>
+                    <button class="action-button" onclick="addTemplate('projects')">🛠️ Add Projects</button>
+                    <button class="action-button" onclick="addTemplate('certifications')">🏆 Add Certifications</button>
+                </div>
+            </div>
+            
+            <div class="conversation-controls">
+                <h4>💾 Conversation:</h4>
+                <div class="conversation-buttons">
+                    <button class="action-button" onclick="newConversation()" title="Start new conversation">🆕 New Chat</button>
+                    <button class="action-button" onclick="showConversationHistory()" title="View conversation history">📋 History</button>
+                    <button class="action-button" onclick="loadConversations()" title="Load saved conversations">💬 Saved</button>
+                    <button class="action-button" onclick="exportConversation()" title="Export current conversation">📤 Export</button>
+                </div>
+                <div id="conversationInfo">
+                    <span id="currentSessionInfo">No active conversation</span>
+                </div>
+            </div>
+            
+            <div class="loading" id="loadingIndicator">
+                <div class="spinner"></div>
+                <p>Generating your resume...</p>
+            </div>
+            
+            <div class="chat-input-container">
+                <div class="chat-input">
+                    <textarea 
+                        id="messageInput" 
+                        placeholder="Type your message here... (e.g., 'I have a Bachelor's in Computer Science from MIT')"
+                        rows="3"
+                    ></textarea>
+                    <button class="send-button" id="sendButton" onclick="sendMessage()">
+                        Send 🚀
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- PDF Viewer -->
+        <div class="pdf-panel" id="pdfPanel">
+            <div class="pdf-header">
+                <div class="pdf-title">📄 Live Resume Preview</div>
+                <div class="pdf-controls">
+                    <button class="pdf-button" onclick="refreshPDF()">🔄 Refresh</button>
+                    <button class="pdf-button special" onclick="generateLatexResume()">🎯 Generate LaTeX</button>
+                <button class="pdf-button" onclick="testLLMTool()" style="background-color: #ff6b35; color: white;">🧪 Test Tool</button>
+                <button class="pdf-button" onclick="debugMemory()" style="background-color: #6b73ff; color: white;">🧠 Debug Memory</button>
+                    <button class="pdf-button" onclick="openPDFNewTab()">👁️ View PDF</button>
+                    <button class="pdf-button primary" onclick="downloadPDF()">📥 Download</button>
+                </div>
+                <div class="panel-controls">
+                    <button class="panel-btn" onclick="setViewMode('split')" title="Split View">⚌ Split</button>
+                    <button class="panel-btn" onclick="setViewMode('chat')" title="Chat Only">💬 Chat</button>
+                    <button class="panel-btn" onclick="setViewMode('pdf')" title="PDF Only">📄 PDF</button>
+                </div>
+            </div>
+            
+            <div class="pdf-viewer" id="pdfViewer">
+                <div class="pdf-placeholder" id="pdfPlaceholder">
+                    <div class="icon">📄</div>
+                    <h3>Loading Resume...</h3>
+                    <p>If the PDF doesn't appear, your browser might not support embedded PDFs.</p>
+                    <a href="output.pdf" target="_blank" class="fallback-link">📄 View PDF in New Tab</a>
+                    <br>
+                    <button class="fallback-link" onclick="loadPDFEmbed()">🔄 Try Loading Again</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html> 

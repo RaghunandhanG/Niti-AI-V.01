@@ -1,0 +1,17 @@
+# Google Gemini API Configuration Template
+# 
+# TO SET UP YOUR GOOGLE GEMINI API KEY:
+# 1. Get your free API key from: https://aistudio.google.com/app/apikey
+# 2. Create a new file called '.env' in this directory (Niti-AI folder)
+# 3. Add this line to the .env file:
+# 
+# GOOGLE_API_KEY=your_actual_google_api_key_here
+#
+# 4. Replace 'your_actual_google_api_key_here' with your real API key
+# 5. Save the .env file
+# 6. Restart the application
+#
+# Example .env file content:
+# GOOGLE_API_KEY=AIzaSyA1234567890abcdefghijklmnopqrstuvwxyz
+#
+# Note: Never share your API key publicly or commit it to version control! 

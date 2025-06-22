@@ -1,0 +1,7 @@
+Flask==2.3.3
+Werkzeug==2.3.7
+langchain-google-genai
+langchain-core==0.2.5
+langchain==0.2.5
+python-dotenv==1.0.0
+google-generativeai 
