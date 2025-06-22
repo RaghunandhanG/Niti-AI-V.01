@@ -1,150 +1,246 @@
-# 🤖 AI Resume Builder
+# AI Resume Builder
 
-A modern web application that combines AI-powered resume generation with real-time PDF preview. Built with Flask and featuring an intuitive chat interface.
+An intelligent resume builder powered by Google Gemini AI that generates professional LaTeX resumes with real-time compilation and PDF preview. The application features a modern web interface with conversation memory and LinkedIn integration capabilities.
 
-## ✨ Features
+## 🚀 Features
 
-- **AI Chat Interface**: Interactive chat to gather your professional information
-- **Real-time PDF Preview**: Live preview of your resume as it's being built
-- **Flexible View Modes**: Split view, chat-only, PDF-only, and fullscreen modes
-- **Quick Action Templates**: Pre-built templates for education, experience, skills, etc.
-- **Responsive Design**: Works seamlessly on desktop and mobile devices
-- **LaTeX Resume Generation**: Professional resume formatting using LaTeX
-- **Download & Share**: Easy PDF download and sharing capabilities
+- **AI-Powered Resume Generation**: Uses Google Gemini 2.0 Flash model for intelligent resume creation
+- **Real-time LaTeX Compilation**: Automatic compilation to PDF with live preview
+- **Conversation Memory**: Maintains chat history across sessions
+- **LinkedIn Integration**: Optional LinkedIn profile data fetching (when configured)
+- **Professional Templates**: ATS-friendly LaTeX templates with modern formatting
+- **Tool-Based Architecture**: LangChain tools for modular functionality
+- **Responsive UI**: Clean, modern interface with keyboard shortcuts
+- **Session Management**: Multiple conversation support with switching capability
+
+## 📋 Prerequisites
+
+### Required Software
+- **Python 3.8+**
+- **LaTeX Distribution** (one of the following):
+  - [MiKTeX](https://miktex.org/download) (Windows)
+  - [TeX Live](https://www.tug.org/texlive/) (Cross-platform)
+  - [MacTeX](https://www.tug.org/mactex/) (macOS)
+
+### API Keys
+- **Google Gemini API Key** (required)
+  - Get from: [Google AI Studio](https://aistudio.google.com/app/apikey)
+- **LinkedIn API Key** (optional)
+  - Required for LinkedIn profile integration
+
+## 🛠️ Installation
+
+### 1. Clone the Repository
+```bash
+git clone https://github.com/yourusername/ai-resume-builder.git
+cd ai-resume-builder
+```
+
+### 2. Set Up Virtual Environment
+```bash
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+```
+
+### 3. Install Dependencies
+```bash
+cd RESUME-BUILDER-INITIAL-FULL-FUNCTIONING
+pip install -r requirements.txt
+```
+
+### 4. Configure Environment Variables
+Create a `.env` file in the `RESUME-BUILDER-INITIAL-FULL-FUNCTIONING` directory:
+
+```env
+# Google Gemini API (Required)
+GOOGLE_API_KEY=your_google_gemini_api_key_here
+
+# LinkedIn API (Optional - for LinkedIn integration)
+LINKEDIN_API_KEY=your_linkedin_api_key_here
+```
+
+### 5. Install LaTeX (if not already installed)
+
+#### Windows (MiKTeX)
+1. Download from [MiKTeX Downloads](https://miktex.org/download)
+2. Run installer and follow instructions
+3. The app will auto-detect common installation paths
+
+#### macOS (MacTeX)
+```bash
+# Using Homebrew
+brew install --cask mactex
+```
+
+#### Linux (TeX Live)
+```bash
+# Ubuntu/Debian
+sudo apt-get install texlive-full
+
+# CentOS/RHEL
+sudo yum install texlive-scheme-full
+```
 
 ## 🚀 Quick Start
 
-### Prerequisites
-
-- Python 3.7 or higher
-- LaTeX distribution (for PDF generation)
-
-### Installation
-
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/yourusername/ai-resume-builder.git
-   cd ai-resume-builder
-   ```
-
-2. **Install Python dependencies**
-   ```bash
-   pip install flask
-   ```
-
-3. **Install LaTeX (if not already installed)**
-   - **Windows**: Install MiKTeX or TeX Live
-   - **macOS**: Install MacTeX
-   - **Linux**: Install texlive-full
-
-4. **Run the application**
-   ```bash
-   python resume_app.py
-   ```
-   
-   Or use the Windows batch file:
-   ```bash
-   start_server.bat
-   ```
-
-5. **Open your browser**
-   Navigate to `http://localhost:5000`
-
-## 🎮 Usage
-
-### View Controls
-- **⚌ Split**: Default split view (chat + PDF)
-- **💬 Chat**: Chat-only mode
-- **📄 PDF**: PDF-only mode
-- **⛶ Full**: Fullscreen PDF mode
-
-### Keyboard Shortcuts
-- `Ctrl+1`: Split view
-- `Ctrl+2`: Chat-only mode
-- `Ctrl+3`: PDF-only mode
-- `Ctrl+4`: Fullscreen PDF
-- `Escape`: Exit fullscreen
-
-### Quick Actions
-Use the built-in templates to quickly add:
-- 🎓 Education background
-- 💼 Work experience
-- ⚡ Skills and technologies
-- 🛠️ Projects and achievements
-- 🏆 Certifications
-
-## 📁 Project Structure
-
+### 1. Start the Application
+```bash
+cd RESUME-BUILDER-INITIAL-FULL-FUNCTIONING
+python app_backend.py
 ```
-ai-resume-builder/
-├── resume_app.py          # Main Flask application
-├── app.py                 # LaTeX resume generator
-├── start_server.bat       # Windows startup script
-├── output.pdf             # Generated resume (sample)
-├── output.tex             # LaTeX source file
-└── README.md              # This file
+
+### 2. Access the Web Interface
+Open your browser and navigate to:
+```
+http://localhost:5001
+```
+
+### 3. Create Your First Resume
+1. Click "Start New Chat" 
+2. Type: "Create my resume with the following information: [your details]"
+3. The AI will generate a professional LaTeX resume
+4. View the PDF preview in real-time
+5. Download when satisfied
+
+## 💬 Usage Examples
+
+### Basic Resume Creation
+```
+Create my resume:
+- Name: John Doe
+- Email: john.doe@email.com
+- Phone: (555) 123-4567
+- Experience: Software Engineer at Tech Corp (2020-2024)
+- Education: BS Computer Science, University XYZ
+- Skills: Python, JavaScript, React, SQL
+```
+
+### Resume Updates
+```
+Update my resume to add these new skills: Docker, Kubernetes, AWS
+```
+
+### LinkedIn Integration
+```
+Use LinkedIn tool to fetch my profile data and create a resume
 ```
 
 ## 🔧 Configuration
 
-The application includes a sample resume for "Raghunandhan G" to demonstrate functionality. To customize:
+### LaTeX Compilation Settings
+The app automatically detects LaTeX installations in common locations:
+- Windows: MiKTeX paths
+- macOS: MacTeX paths  
+- Linux: TeX Live paths
 
-1. Edit the personal information in `app.py`
-2. Modify the LaTeX template as needed
-3. Run the resume generator to create your PDF
+### Conversation Memory
+- Conversations are stored in-memory
+- Maximum 100 messages per conversation
+- Messages are auto-truncated if too long
+- Session switching supported
 
-## 🌟 Features in Detail
+### LinkedIn Integration
+When LinkedIn API is configured:
+1. Set `LINKEDIN_API_KEY` in `.env`
+2. Use the dropdown in the UI to enable LinkedIn mode
+3. The AI can fetch and use LinkedIn profile data
 
-### AI Chat Interface
-- Natural language processing for resume building
-- Context-aware responses and suggestions
-- Progressive information gathering
-- Real-time feedback and confirmations
+## 📁 Project Structure
 
-### PDF Preview System
-- Multiple fallback methods for browser compatibility
-- Automatic refresh when resume is updated
-- Download and external viewing options
-- Mobile-responsive PDF display
+```
+RESUME-BUILDER-INITIAL-FULL-FUNCTIONING/
+├── app_backend.py          # Main Flask application
+├── requirements.txt        # Python dependencies
+├── system_prompt.txt       # AI system prompt
+├── templates/
+│   └── index.html         # Main web interface
+├── static/
+│   ├── css/
+│   │   └── style.css      # Styles
+│   └── js/
+│       └── app.js         # Frontend JavaScript
+├── output.tex             # Generated LaTeX (auto-created)
+├── output.pdf             # Generated PDF (auto-created)
+└── .env                   # Environment variables (create this)
+```
 
-### View Management
-- Dynamic panel resizing and hiding
-- Smooth animations and transitions
-- Persistent view state management
-- Keyboard navigation support
+## 🔌 API Endpoints
 
-## 🔮 Future Enhancements
+| Endpoint | Method | Description |
+|----------|--------|-------------|
+| `/` | GET | Main application page |
+| `/chat` | POST | Send message to AI |
+| `/start_session` | POST | Start new conversation |
+| `/get_conversation_history` | GET | Get chat history |
+| `/list_conversations` | GET | List all conversations |
+| `/switch_conversation` | POST | Switch between conversations |
+| `/delete_conversation` | DELETE | Delete conversation |
+| `/compile_resume` | POST | Compile existing LaTeX |
+| `/output.pdf` | GET | Serve generated PDF |
+| `/download` | GET | Download PDF file |
 
-- [ ] Integration with actual LLM APIs (OpenAI, Claude, etc.)
-- [ ] Multiple resume templates and themes
-- [ ] Export to different formats (Word, HTML, etc.)
-- [ ] Resume analysis and improvement suggestions
-- [ ] Cloud storage and sharing capabilities
-- [ ] Multi-language support
+## ⌨️ Keyboard Shortcuts
 
-## 🤝 Contributing
+- `Ctrl + 1`: Chat-only view
+- `Ctrl + 2`: Split view (chat + PDF)
+- `Ctrl + 3`: PDF-only view
+- `Enter`: Send message
+- `Shift + Enter`: New line in message
 
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+## 🔧 Troubleshooting
 
-## 📝 License
+### Chat Not Working
+- Verify `GOOGLE_API_KEY` is set correctly in `.env`
+- Check API key validity at Google AI Studio
+- Restart the application after adding environment variables
+
+### PDF Compilation Issues
+- Ensure LaTeX is properly installed
+- Check LaTeX installation with: `pdflatex --version`
+- Windows: Try running as administrator
+- Check console logs for specific LaTeX errors
+
+### LinkedIn Integration Issues
+- Verify `LINKEDIN_API_KEY` in `.env`
+- Check LinkedIn API quota and permissions
+- Ensure proper API scopes are configured
+
+## 🏗️ Development
+
+### Adding New Features
+1. Tools: Add to the tools section in `app_backend.py`
+2. Routes: Add new Flask routes as needed
+3. Frontend: Modify `static/js/app.js` and templates
+4. Styling: Update `static/css/style.css`
+
+### Testing
+```bash
+# Test LaTeX generation
+curl -X POST http://localhost:5001/test_tool
+
+# Debug memory
+curl http://localhost:5001/debug_memory
+```
+
+## 📦 Dependencies
+
+### Python Packages
+- Flask: Web framework
+- LangChain: AI orchestration
+- Google Generative AI: AI model integration
+- python-dotenv: Environment management
+
+### External Tools
+- LaTeX distribution (MiKTeX/TeX Live/MacTeX)
+- PDF viewer (browser built-in)
+
+## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## 🙏 Acknowledgments
 
-- Built with Flask web framework
-- LaTeX for professional document formatting
-- Modern CSS and JavaScript for responsive UI
-- Icons and emojis for enhanced user experience
-
-## 📧 Contact
-
-For questions or support, please open an issue on GitHub.
-
----
-
-**Made with ❤️ for job seekers worldwide** 
+- [LangChain](https://python.langchain.com/) for AI orchestration
+- [Google Gemini](https://ai.google.dev/) for AI capabilities
+- [Flask](https://flask.palletsprojects.com/) for web framework
+- LaTeX community for resume templates 
