@@ -108,7 +108,7 @@ def write_latex(latex_code: str) -> dict:
 def initialize_llm():
     global llm, llm_with_tools
     try:
-        api_key = "AIzaSyD66tHLhzCcOiAKO4rL6NwwfOyNwDeZ6fM"
+        api_key = ""
         if api_key:
             llm = ChatGoogleGenerativeAI(
                 model="gemini-2.0-flash-001",
